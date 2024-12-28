@@ -21,6 +21,7 @@ def binarizeChannel(masks):
     return masks_binary
 
 def show_image(image): 
+    image = np.transpose(image, (2, 0, 1)).astype(np.float32) # (h, w, c)
     plt.figure(figsize=(6,6))
     plt.imshow(image.squeeze(), cmap='gray')
     plt.axis('off')
