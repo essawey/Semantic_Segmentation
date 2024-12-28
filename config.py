@@ -5,7 +5,7 @@ BATCH_SIZE = 8
 IMG_SIZE = 512
 ENCODER = 'timm-efficientnet-b0'
 WEIGHTS = 'imagenet'
-
+NUM_OF_CLASSES = 6
 
 
 # ClientID = -1
