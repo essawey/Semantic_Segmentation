@@ -1,4 +1,4 @@
-DEVICE = 'cpu'
+DEVICE = 'cuda'
 EPOCHS = 2
 LR = 0.003
 BATCH_SIZE = 8
