@@ -4,7 +4,7 @@ LR = 0.003
 BATCH_SIZE = 8
 IMG_SIZE = 512
 ENCODER = 'efficientnet-b4'
-WEIGHTS = 'imagenet'
+ENCODER_WEIGHTS = 'imagenet'
 NUM_OF_CLASSES = 6
 
 
