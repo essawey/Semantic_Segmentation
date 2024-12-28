@@ -20,8 +20,13 @@ def binarizeChannel(masks):
 
     return masks_binary
 
+def show_image(image): 
+    plt.figure(figsize=(6,6))
+    plt.imshow(image.squeeze(), cmap='gray')
+    plt.axis('off')
+    plt.show()
 
-def plot(mask):
+def show_mask(mask):
 
     masksLabels = [
         'Neoplastic cells',
