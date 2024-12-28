@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 def binarizeChannel(masks):
 
     masksNum, channels, _, _ = masks.shape
@@ -18,14 +21,27 @@ def binarizeChannel(masks):
     return masks_binary
 
 
-def plot(trainMasks, idx):
+def plot(mask):
+
+
+    masksLabels = [
+        'Neoplastic cells',
+        'Inflammatory',
+        'Connective/Soft tissue cells',
+        'Dead Cells',
+        'Epithelial',
+        'Background',
+    ]
+
+    labels_idx = {label_idx: label for label_idx, label in enumerate(masksLabels)}
+
     fig, axes = plt.subplots(2, 3, figsize=(10, 6))
 
     channel_images = []
 
     for channel_index in range(trainMasks.shape[3]):
 
-        max_value = np.max(trainMasks[idx, :, :, channel_index])
+        max_value = np.max(trainMasks[ :, :, channel_index])
 
         colors = plt.cm.get_cmap('tab20', int(max_value + 1))
 
@@ -33,7 +49,7 @@ def plot(trainMasks, idx):
         col = channel_index % 3
 
         ax = axes[row, col]
-        im = ax.imshow(trainMasks[idx, :, :, channel_index], cmap=colors, vmin=0, vmax=max_value)
+        im = ax.imshow(trainMasks[ :, :, channel_index], cmap=colors, vmin=0, vmax=max_value)
         ax.set_title(f'Channel {channel_index} : {list(labels_idx.values())[channel_index]}')
         ax.axis('off')
         channel_images.append(im)
