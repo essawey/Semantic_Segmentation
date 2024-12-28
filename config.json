@@ -1,0 +1,37 @@
+my_config = {
+
+    # For the entire dataset: ClientID = -1
+    # For specific clients: ClientID = 0, 1, 2, or 3
+    "ClientID": -1,
+
+    # Local Resources
+    "num_cpus": 32,
+    "num_gpus": 2,
+
+    # Higher batch size take more resources
+    # 2 => 12.something GPU RAM
+    "train_batch_size": 4,
+    "val_batch_size": 4,
+    "test_batch_size": 4,
+
+    # Data Split
+    "validation_split_per_client": 0.1,
+    "test_split": 0.1,
+
+    # FL Parameters
+    "num_clients": 4,
+    "epochs": 1,
+    "num_rounds": 3,
+
+    # Training Parameters
+    'learning_rate': 0.01,
+    "validation_freq": 1,
+    "early_stopping_patience": 10,
+    
+    # Loss Weights
+    "DiceWeight": 1/3,
+    "TverskyWeight": 1/3,
+    "IoUWeight": 1/3,
+    "CFCWeight": 0/4, # Categorical Focal Cross entropy Loss
+
+}
