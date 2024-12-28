@@ -26,8 +26,8 @@ def show_image(image):
     plt.axis('off')
     plt.show()
 
-def show_mask(mask):
 
+def show_mask(mask):
     masksLabels = [
         'Neoplastic cells',
         'Inflammatory',
@@ -43,15 +43,15 @@ def show_mask(mask):
 
     channel_images = []
 
-    for channel_index in range(mask.shape[2]):
-        max_value = np.max(mask[:, :, channel_index])
+    for channel_index in range(mask.shape[0]):  # Now channels are the first dimension (c)
+        max_value = np.max(mask[channel_index, :, :])  # Accessing the mask for each channel
         colors = plt.cm.get_cmap('tab20', int(max_value + 1))
 
         row = channel_index // 3
         col = channel_index % 3
 
         ax = axes[row, col]
-        im = ax.imshow(mask[:, :, channel_index], cmap=colors, vmin=0, vmax=max_value)
+        im = ax.imshow(mask[channel_index, :, :], cmap=colors, vmin=0, vmax=max_value)
         ax.set_title(f'Channel {channel_index} : {list(labels_idx.values())[channel_index]}')
         ax.axis('off')
         channel_images.append(im)
