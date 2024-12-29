@@ -33,6 +33,9 @@ def show_image(image):
     plt.axis('off')
     plt.show()
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 def show_mask(mask):
     masksLabels = [
         'Neoplastic cells',
@@ -42,6 +45,10 @@ def show_mask(mask):
         'Epithelial',
         'Background',
     ]
+
+    # Ensure mask is a numpy array
+    if not isinstance(mask, np.ndarray):
+        mask = np.array(mask)
 
     # Ensure mask shape is (6, height, width)
     if mask.shape[0] != 6:
