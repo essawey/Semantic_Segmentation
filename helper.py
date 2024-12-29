@@ -33,7 +33,6 @@ def show_image(image):
     plt.axis('off')
     plt.show()
 
-
 def show_mask(mask):
     masksLabels = [
         'Neoplastic cells',
@@ -44,14 +43,21 @@ def show_mask(mask):
         'Background',
     ]
 
+    # Ensure mask shape is (6, height, width)
+    if mask.shape[0] != 6:
+        if 1 in mask.shape:
+            mask = np.squeeze(mask)
+        mask = np.eye(6)[mask]  # One-hot encode to (height, width, 6)
+        mask = np.moveaxis(mask, -1, 0)  # Rearrange to (6, height, width)
+
     labels_idx = {label_idx: label for label_idx, label in enumerate(masksLabels)}
 
     fig, axes = plt.subplots(2, 3, figsize=(10, 6))
 
     channel_images = []
 
-    for channel_index in range(mask.shape[0]):  # Now channels are the first dimension (c)
-        max_value = np.max(mask[channel_index, :, :])  # Accessing the mask for each channel
+    for channel_index in range(mask.shape[0]):
+        max_value = np.max(mask[channel_index, :, :])
         colors = plt.cm.get_cmap('tab20', int(max_value + 1))
 
         row = channel_index // 3
@@ -59,7 +65,7 @@ def show_mask(mask):
 
         ax = axes[row, col]
         im = ax.imshow(mask[channel_index, :, :], cmap=colors, vmin=0, vmax=max_value)
-        ax.set_title(f'Channel {channel_index} : {list(labels_idx.values())[channel_index]}')
+        ax.set_title(f'Channel {channel_index} : {labels_idx[channel_index]}')
         ax.axis('off')
         channel_images.append(im)
 
