@@ -8,8 +8,6 @@ ENCODER_WEIGHTS = 'imagenet'
 NUM_OF_CLASSES = 6
 
 # ClientID = -1
-# num_cpus = 32
-# num_gpus = 2
 # num_clients = 4
 # num_rounds = 3
 # validation_freq = 1
