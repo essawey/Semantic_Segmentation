@@ -1,5 +1,5 @@
 DEVICE = 'cuda'
-EPOCHS = 10
+EPOCHS = 1
 LR = 0.003
 BATCH_SIZE = 8
 IMG_SIZE = 512
