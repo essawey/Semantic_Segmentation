@@ -27,24 +27,24 @@ def binarizeChannel(masks):
 
     return masks_binary
 
-def show_image(image): 
+def show_image(image):
 
     means = [0.7039875984191895, 0.5724194049835205, 0.7407296895980835]
     stds = [0.12305392324924469, 0.16210812330245972, 0.14659656584262848]
-    
+
     means_tensor = torch.tensor(means).view(3, 1, 1)  # Shape: [3, 1, 1]
     stds_tensor = torch.tensor(stds).view(3, 1, 1)    # Shape: [3, 1, 1]
 
     # Reverse normalization: (image * std) + mean
     image = image * stds_tensor + means_tensor
-    
+
     image = image.permute(1, 2, 0).numpy()
     plt.figure(figsize=(6,6))
     plt.axis('off')
 
     plt.imshow(image)
     plt.show()
-    
+
 
 def show_mask(mask):
     masksLabels = [
