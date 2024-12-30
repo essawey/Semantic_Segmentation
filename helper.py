@@ -1,4 +1,3 @@
-import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 from torchvision import transforms
@@ -6,6 +5,8 @@ from PIL import Image
 import os
 import cv2
 import math
+import torch
+import numpy as np
 
 def binarizeChannel(masks):
 
@@ -27,14 +28,23 @@ def binarizeChannel(masks):
     return masks_binary
 
 def show_image(image): 
-    # image = np.transpose(image, (1, 2, 0)) # (h, w, c)
-    plt.figure(figsize=(6,6))
-    plt.imshow(image.squeeze(), cmap='gray')
-    plt.axis('off')
-    plt.show()
 
-import numpy as np
-import matplotlib.pyplot as plt
+    means = [0.7039875984191895, 0.5724194049835205, 0.7407296895980835]
+    stds = [0.12305392324924469, 0.16210812330245972, 0.14659656584262848]
+    
+    means_tensor = torch.tensor(means).view(3, 1, 1)  # Shape: [3, 1, 1]
+    stds_tensor = torch.tensor(stds).view(3, 1, 1)    # Shape: [3, 1, 1]
+
+    # Reverse normalization: (image * std) + mean
+    image = image * stds_tensor + means_tensor
+    
+    image = image.permute(1, 2, 0).numpy()
+    plt.figure(figsize=(6,6))
+    plt.axis('off')
+
+    plt.imshow(image)
+    plt.show()
+    
 
 def show_mask(mask):
     masksLabels = [
