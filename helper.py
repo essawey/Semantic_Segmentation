@@ -87,7 +87,7 @@ def show_mask(mask):
         channel_images.append(im)
 
     cbar_ax = fig.add_axes([0.15, -0.02, 0.7, 0.03])
-    fig.colorbar(channel_images[0], cax=cbar_ax, orientation='horizontal')
+    fig.colorbar(channel_images[-1], cax=cbar_ax, orientation='horizontal')
     plt.tight_layout()
     plt.show()
 
